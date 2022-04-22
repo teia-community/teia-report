@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: ⚙️ Install jq
+        run: sudo apt-get install -y jq
       - uses: actions/checkout@v2
         with:
           ref: main
 
       - name: 🗄 Fetch Objkt.com bans
         run: |
-          wget https://back.objkt.com/api/v1/bans.json -O objktcom.json
+          curl https://back.objkt.com/api/v1/bans.json | jq ".banned" > objktcom.json
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Update bans
+          commit_message: ✨ Update bans
