@@ -1,0 +1,24 @@
+name: Replicate bans
+
+on:
+  # manually
+  workflow_dispatch:
+  schedule:
+    # every two minutes
+    - cron: "*/2 * * * *"
+
+jobs:
+  pull_stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: 🗄 Fetch Objkt.com bans
+        run: |
+          wget https://back.objkt.com/api/v1/bans.json -O objktcom.json
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update bans
