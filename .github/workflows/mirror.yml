@@ -3,9 +3,9 @@ name: Replicate bans
 on:
   # manually
   workflow_dispatch:
-  schedule:
+  # schedule:
     # every two minutes
-    - cron: "*/2 * * * *"
+    # - cron: "*/2 * * * *"
 
 jobs:
   pull_stats:
